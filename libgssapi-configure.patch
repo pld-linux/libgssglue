@@ -1,0 +1,47 @@
+--- libgssapi-0.1/configure.in.orig	2004-10-22 16:58:34.000000000 +0200
++++ libgssapi-0.1/configure.in	2004-12-22 17:23:24.000000000 +0100
+@@ -61,8 +61,8 @@
+   fi
+   if test "$K5CONFIG" != ""; then
+     if test -f $dir/include/gssapi/gssapi_krb5.h -a \
+-            \( -f $dir/lib/libgssapi_krb5.a -o \
+-	    -f $dir/lib/libgssapi_krb5.so \) ; then
++            \( -f $dir/lib/libgssapi_krb5.so -o \
++	    -f $dir/lib64/libgssapi_krb5.so \) ; then
+        AC_DEFINE(HAVE_KRB5)
+        KRBDIR="$dir"
+        K5VERS=`$K5CONFIG --version | awk '{split($4,v,"."); print v[[1]]v[[2]]v[[3]] }'`
+@@ -82,7 +82,7 @@
+     dnl of Heimdal Kerberos on SuSe
+     elif test \( -f $dir/include/heim_err.h -o\
+     		 -f $dir/include/heimdal/heim_err.h \) -a \
+-              -f $dir/lib/libroken.a; then
++              \( -f $dir/lib/libroken.so -o -f $dir/lib64/libroken.so \) ; then
+        AC_DEFINE(HAVE_HEIMDAL)
+        KRBDIR="$dir"
+        K5VERS=`$K5CONFIG --version | head -1 | awk '{split($2,v,"."); print v[[1]]v[[2]]v[[3]] }'`
+@@ -96,7 +96,7 @@
+          AC_DEFINE(HAVE_GSS_KRB5_CCACHE_NAME),,$KRBLIB)
+       break
+     fi
+-    CFLAGS=$CFLAGS `K5CONFIG --cflags`
++    CFLAGS="$CFLAGS `$K5CONFIG --cflags`"
+   fi
+ done
+ dnl We didn't find a usable Kerberos environment
+--- libgssapi-0.1/Makefile.am.orig	2004-10-25 19:01:11.000000000 +0200
++++ libgssapi-0.1/Makefile.am	2004-12-22 17:32:12.000000000 +0100
+@@ -5,4 +5,3 @@
+ dist-hook:
+ 	mkdir $(distdir)/debian/
+ 	find $(srcdir)/debian -maxdepth 1 -type f |xargs -i cp {} $(distdir)/debian/
+-	#XXX: also exclude debian/files and debian/files.new ? do a clean??
+--- libgssapi-0.1/src/Makefile.am.orig	2004-10-25 18:55:31.000000000 +0200
++++ libgssapi-0.1/src/Makefile.am	2004-12-22 17:42:28.000000000 +0100
+@@ -10,5 +10,6 @@
+ 	g_rel_buffer.c g_rel_cred.c g_rel_name.c g_rel_oid_set.c g_seal.c \
+ 	g_sign.c gssd_pname_to_uid.c g_unseal.c g_verify.c oid_ops.c \
+ 	g_set_allowable_enctypes.c mglueP.h mechglue.h
++libgssapi_la_LIBADD = -ldl
+ 
+ INCLUDES = -I../include
