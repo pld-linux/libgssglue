@@ -29,16 +29,16 @@ Ta biblioteka eksportuje interfejs GSSAPI, ale sama nie implementuje
 innych bibliotek, w zale¿no¶ci od mechanizmu.
 
 %package devel
-Summary:	Header files for libgssapi library
-Summary(pl):	Pliki nag³ówkowe biblioteki libgssapi
+Summary:	Development files for libgssapi library
+Summary(pl):	Pliki programistyczne biblioteki libgssapi
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Header files for libgssapi library.
+Development files for libgssapi library.
 
 %description devel -l pl
-Pliki nag³ówkowe biblioteki libgssapi.
+Pliki programistyczne biblioteki libgssapi.
 
 %package static
 Summary:	Static libgssapi library
