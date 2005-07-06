@@ -2,7 +2,7 @@ Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl):	Interfejs GSSAPI u¿ywaj±cy mechanizmów z innych implementacji GSSAPI
 Name:		libgssapi
 Version:	0.3
-Release:	1
+Release:	2
 License:	mixture of UM and Sun licenses
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{version}.tar.gz
@@ -11,7 +11,7 @@ Patch0:		%{name}-configure.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	heimdal-devel
+BuildRequires:	heimdal-devel >= 0.7
 BuildRequires:	libtool
 # it's checked before heimdal (which is preferred in PLD)
 BuildConflicts:	krb5-devel
