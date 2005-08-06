@@ -1,12 +1,12 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl):	Interfejs GSSAPI u¿ywaj±cy mechanizmów z innych implementacji GSSAPI
 Name:		libgssapi
-Version:	0.3
-Release:	2
+Version:	0.4
+Release:	1
 License:	mixture of UM and Sun licenses
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{version}.tar.gz
-# Source0-md5:	95bbc298bb5112f2d728ecbed75d8728
+# Source0-md5:	ed457ee28c252225d1988d5a580d4b99
 Patch0:		%{name}-configure.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 BuildRequires:	autoconf >= 2.59
