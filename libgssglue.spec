@@ -1,21 +1,16 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl):	Interfejs GSSAPI u¿ywaj±cy mechanizmów z innych implementacji GSSAPI
 Name:		libgssapi
-Version:	0.2
+Version:	0.9
 Release:	1
 License:	mixture of UM and Sun licenses
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{version}.tar.gz
-# Source0-md5:	809ea135dba0ab74fa595b04f9d156c2
-Patch0:		%{name}-configure.patch
+# Source0-md5:	6a71e2d1d0d865baee12f1a1aace0d6a
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	heimdal-devel
 BuildRequires:	libtool
-# it's checked before heimdal (which is preferred in PLD)
-BuildConflicts:	krb5-devel
-Requires:	heimdal-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -54,15 +49,13 @@ Statyczna biblioteka libgssapi.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
-%configure \
-	--with-krb5=/usr
+%configure
 %{__make}
 
 %install
@@ -70,6 +63,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install -D doc/gssapi_mech.conf $RPM_BUILD_ROOT%{_sysconfdir}/gssapi_mech.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -79,13 +74,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING README
+%doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) %{_libdir}/libgssapi.so.*.*.*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gssapi_mech.conf
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgssapi.so
 %{_libdir}/libgssapi.la
+%{_includedir}/gssglue
+%{_pkgconfigdir}/libgssapi.pc
 
 %files static
 %defattr(644,root,root,755)
