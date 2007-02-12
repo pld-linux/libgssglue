@@ -1,5 +1,5 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
-Summary(pl):	Interfejs GSSAPI uøywaj±cy mechanizmÛw z innych implementacji GSSAPI
+Summary(pl.UTF-8):   Interfejs GSSAPI u≈ºywajƒÖcy mechanizm√≥w z innych implementacji GSSAPI
 Name:		libgssapi
 Version:	0.10
 Release:	1
@@ -18,33 +18,33 @@ This library exports a GSSAPI interface, but doesn't implement any
 GSSAPI mechanisms itself; instead it calls GSSAPI routines in other
 libraries, depending on the mechanism.
 
-%description -l pl
+%description -l pl.UTF-8
 Ta biblioteka eksportuje interfejs GSSAPI, ale sama nie implementuje
-øadnego mechanizmu GSSAPI - zamiast tego wywo≥uje funkcje GSSAPI z
-innych bibliotek, w zaleøno∂ci od mechanizmu.
+≈ºadnego mechanizmu GSSAPI - zamiast tego wywo≈Çuje funkcje GSSAPI z
+innych bibliotek, w zale≈ºno≈õci od mechanizmu.
 
 %package devel
 Summary:	Development files for libgssapi library
-Summary(pl):	Pliki programistyczne biblioteki libgssapi
+Summary(pl.UTF-8):   Pliki programistyczne biblioteki libgssapi
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Development files for libgssapi library.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki programistyczne biblioteki libgssapi.
 
 %package static
 Summary:	Static libgssapi library
-Summary(pl):	Statyczna biblioteka libgssapi
+Summary(pl.UTF-8):   Statyczna biblioteka libgssapi
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libgssapi library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka libgssapi.
 
 %prep
