@@ -1,5 +1,5 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
-Summary(pl.UTF-8):   Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
+Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
 Name:		libgssapi
 Version:	0.10
 Release:	1
@@ -25,7 +25,7 @@ innych bibliotek, w zależności od mechanizmu.
 
 %package devel
 Summary:	Development files for libgssapi library
-Summary(pl.UTF-8):   Pliki programistyczne biblioteki libgssapi
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki libgssapi
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -37,7 +37,7 @@ Pliki programistyczne biblioteki libgssapi.
 
 %package static
 Summary:	Static libgssapi library
-Summary(pl.UTF-8):   Statyczna biblioteka libgssapi
+Summary(pl.UTF-8):	Statyczna biblioteka libgssapi
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
