@@ -7,6 +7,7 @@ License:	mixture of UM and Sun licenses
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{version}.tar.gz
 # Source0-md5:	0a384f8efaefe45373bb206b592152b5
+Patch0:		%{name}-soname.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -49,6 +50,7 @@ Statyczna biblioteka libgssapi.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -64,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -D doc/gssapi_mech.conf $RPM_BUILD_ROOT%{_sysconfdir}/gssapi_mech.conf
+sed -e 's|lib|%{_lib}|g' doc/gssapi_mech.conf > $RPM_BUILD_ROOT%{_sysconfdir}/gssapi_mech.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
