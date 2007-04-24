@@ -1,12 +1,12 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
 Name:		libgssapi
-Version:	0.10
-Release:	2
+Version:	0.11
+Release:	1
 License:	mixture of UM and Sun licenses
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{version}.tar.gz
-# Source0-md5:	0a384f8efaefe45373bb206b592152b5
+# Source0-md5:	0e5b4c7267724f8ddf64bc35514c272e
 Patch0:		%{name}-soname.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 BuildRequires:	autoconf >= 2.59
@@ -53,21 +53,22 @@ Statyczna biblioteka libgssapi.
 %patch0 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
 %configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/%{_lib}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 sed -e 's|lib|%{_lib}|g' doc/gssapi_mech.conf > $RPM_BUILD_ROOT%{_sysconfdir}/gssapi_mech.conf
+
+mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.* $RPM_BUILD_ROOT/%{_lib}
+rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.so
+ln -sf /%{_lib}/`(cd $RPM_BUILD_ROOT/%{_lib}; echo lib*.so.*.*)` \
+	$RPM_BUILD_ROOT%{_libdir}/libgssapi.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -78,7 +79,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
-%attr(755,root,root) %{_libdir}/libgssapi.so.*.*.*
+%attr(755,root,root) /%{_lib}/libgssapi.so.*.*
+%ghost %attr(755,root,root) /%{_lib}/libgssapi.so.?
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gssapi_mech.conf
 
 %files devel
