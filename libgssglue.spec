@@ -9,9 +9,6 @@ Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{vers
 # Source0-md5:	0e5b4c7267724f8ddf64bc35514c272e
 Patch0:		%{name}-soname.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake
-BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
