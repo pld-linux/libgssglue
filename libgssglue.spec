@@ -1,14 +1,15 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
-Name:		libgssapi
-Version:	0.11
+Name:		libgssglue
+Version:	0.1
 Release:	1
 License:	mixture of UM and Sun licenses
 Group:		Libraries
-Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssapi/%{name}-%{version}.tar.gz
-# Source0-md5:	0e5b4c7267724f8ddf64bc35514c272e
+Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/%{name}-%{version}.tar.gz
+# Source0-md5:	ce1b4c758e6de01b712d154c5c97e540
 Patch0:		%{name}-soname.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
+Obsoletes:	libgssapi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -22,28 +23,30 @@ Ta biblioteka eksportuje interfejs GSSAPI, ale sama nie implementuje
 innych bibliotek, w zależności od mechanizmu.
 
 %package devel
-Summary:	Development files for libgssapi library
-Summary(pl.UTF-8):	Pliki programistyczne biblioteki libgssapi
+Summary:	Development files for libgssglue library
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki libgssglue
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	libgssapi-devel
 
 %description devel
-Development files for libgssapi library.
+Development files for libgssglue library.
 
 %description devel -l pl.UTF-8
-Pliki programistyczne biblioteki libgssapi.
+Pliki programistyczne biblioteki libgssglue.
 
 %package static
-Summary:	Static libgssapi library
-Summary(pl.UTF-8):	Statyczna biblioteka libgssapi
+Summary:	Static libgssglue library
+Summary(pl.UTF-8):	Statyczna biblioteka libgssglue
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	libgssapi-static
 
 %description static
-Static libgssapi library.
+Static libgssglue library.
 
 %description static -l pl.UTF-8
-Statyczna biblioteka libgssapi.
+Statyczna biblioteka libgssglue.
 
 %prep
 %setup -q
@@ -65,7 +68,7 @@ sed -e 's|lib|%{_lib}|g' doc/gssapi_mech.conf > $RPM_BUILD_ROOT%{_sysconfdir}/gs
 mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.* $RPM_BUILD_ROOT/%{_lib}
 rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.so
 ln -sf /%{_lib}/`(cd $RPM_BUILD_ROOT/%{_lib}; echo lib*.so.*.*)` \
-	$RPM_BUILD_ROOT%{_libdir}/libgssapi.so
+	$RPM_BUILD_ROOT%{_libdir}/libgssglue.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -76,17 +79,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
-%attr(755,root,root) /%{_lib}/libgssapi.so.*.*
-%ghost %attr(755,root,root) /%{_lib}/libgssapi.so.?
+%attr(755,root,root) /%{_lib}/libgssglue.so.*.*
+%ghost %attr(755,root,root) /%{_lib}/libgssglue.so.?
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gssapi_mech.conf
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgssapi.so
-%{_libdir}/libgssapi.la
+%attr(755,root,root) %{_libdir}/libgssglue.so
+%{_libdir}/libgssglue.la
 %{_includedir}/gssglue
-%{_pkgconfigdir}/libgssapi.pc
+%{_pkgconfigdir}/libgssglue.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libgssapi.a
+%{_libdir}/libgssglue.a
