@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementa
 Name:		libgssglue
 Version:	0.1
 Release:	1
-License:	mixture of UM and Sun licenses
+License:	BSD/MIT
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/%{name}-%{version}.tar.gz
 # Source0-md5:	ce1b4c758e6de01b712d154c5c97e540
