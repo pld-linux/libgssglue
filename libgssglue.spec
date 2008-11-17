@@ -67,7 +67,7 @@ sed -e 's|lib|%{_lib}|g' doc/gssapi_mech.conf > $RPM_BUILD_ROOT%{_sysconfdir}/gs
 
 mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.* $RPM_BUILD_ROOT/%{_lib}
 rm -f $RPM_BUILD_ROOT%{_libdir}/lib*.so
-ln -sf /%{_lib}/`(cd $RPM_BUILD_ROOT/%{_lib}; echo lib*.so.*.*)` \
+ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/lib*.so.*.*) \
 	$RPM_BUILD_ROOT%{_libdir}/libgssglue.so
 
 %clean
