@@ -12,6 +12,8 @@ URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Obsoletes:	libgssapi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%undefine	__cxx
+
 %description
 This library exports a GSSAPI interface, but doesn't implement any
 GSSAPI mechanisms itself; instead it calls GSSAPI routines in other
@@ -80,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
 %attr(755,root,root) /%{_lib}/libgssglue.so.*.*
-%ghost %attr(755,root,root) /%{_lib}/libgssglue.so.?
+%attr(755,root,root) %ghost /%{_lib}/libgssglue.so.?
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gssapi_mech.conf
 
 %files devel
