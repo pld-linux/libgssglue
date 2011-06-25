@@ -1,12 +1,12 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
 Name:		libgssglue
-Version:	0.2
+Version:	0.3
 Release:	1
 License:	BSD/MIT
 Group:		Libraries
 Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/%{name}-%{version}.tar.gz
-# Source0-md5:	89b3a589780667f666cb8bf033befeb3
+# Source0-md5:	48aaad11b7371ba3270faa322202c038
 Patch0:		%{name}-soname.patch
 URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
 Obsoletes:	libgssapi
@@ -81,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog README
-%attr(755,root,root) /%{_lib}/libgssglue.so.*.*
+%attr(755,root,root) /%{_lib}/libgssglue.so.*.*.*
 %attr(755,root,root) %ghost /%{_lib}/libgssglue.so.1
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gssapi_mech.conf
 
