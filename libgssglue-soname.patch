@@ -1,11 +1,10 @@
 --- libgssapi-0.10/doc/gssapi_mech.conf~	2005-11-22 16:16:31.000000000 +0100
 +++ libgssapi-0.10/doc/gssapi_mech.conf	2007-03-31 01:18:49.285156314 +0200
-@@ -15,7 +15,8 @@
+@@ -15,7 +15,7 @@
  # library                               initialization function
  # ================================	==========================
  # The MIT K5 gssapi library, use special function for initialization.
 -/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init
-+#/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init
 +/usr/lib/libgssapi_krb5.so.2		mechglue_internal_krb5_init
  #
  # The SPKM3 gssapi library function.  Use the function spkm3_gss_initialize.

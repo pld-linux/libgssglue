@@ -1,15 +1,16 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
 Name:		libgssglue
-Version:	0.4
+Version:	0.5
 Release:	1
 License:	BSD/MIT
 Group:		Libraries
-Source0:	http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/%{name}-%{version}.tar.gz
-# Source0-md5:	088797f3180702fa54e786496b32e750
+#Source0Download: https://gitlab.com/gsasl/libgssglue/-/releases
+Source0:	https://gitlab.com/gsasl/libgssglue/uploads/eed1e65e06ed330214bd6f647af42b7f/%{name}-%{version}.tar.gz
+# Source0-md5:	8ffe582d3678b4789d7f67666d71b1d2
 Patch0:		%{name}-soname.patch
-URL:		http://www.citi.umich.edu/projects/nfsv4/linux/
-Obsoletes:	libgssapi
+URL:		https://gitlab.com/gsasl/libgssglue
+Obsoletes:	libgssapi < 0.12
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %undefine	__cxx
@@ -29,7 +30,7 @@ Summary:	Development files for libgssglue library
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki libgssglue
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Obsoletes:	libgssapi-devel
+Obsoletes:	libgssapi-devel < 0.12
 
 %description devel
 Development files for libgssglue library.
@@ -42,7 +43,7 @@ Summary:	Static libgssglue library
 Summary(pl.UTF-8):	Statyczna biblioteka libgssglue
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Obsoletes:	libgssapi-static
+Obsoletes:	libgssapi-static < 0.12
 
 %description static
 Static libgssglue library.
@@ -67,10 +68,13 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/%{_lib}}
 
 sed -e 's|/lib/|/%{_lib}/|g' doc/gssapi_mech.conf > $RPM_BUILD_ROOT%{_sysconfdir}/gssapi_mech.conf
 
-mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.* $RPM_BUILD_ROOT/%{_lib}
+%{__mv} $RPM_BUILD_ROOT%{_libdir}/lib*.so.* $RPM_BUILD_ROOT/%{_lib}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.so
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/lib*.so.*.*) \
 	$RPM_BUILD_ROOT%{_libdir}/libgssglue.so
+
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgssglue.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -88,7 +92,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgssglue.so
-%{_libdir}/libgssglue.la
 %{_includedir}/gssglue
 %{_pkgconfigdir}/libgssglue.pc
 
