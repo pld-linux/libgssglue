@@ -1,14 +1,13 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
 Name:		libgssglue
-Version:	0.5
+Version:	0.8
 Release:	1
 License:	BSD/MIT
 Group:		Libraries
 #Source0Download: https://gitlab.com/gsasl/libgssglue/-/releases
-Source0:	https://gitlab.com/gsasl/libgssglue/uploads/eed1e65e06ed330214bd6f647af42b7f/%{name}-%{version}.tar.gz
-# Source0-md5:	8ffe582d3678b4789d7f67666d71b1d2
-Patch0:		%{name}-soname.patch
+Source0:	https://gitlab.com/gsasl/libgssglue/uploads/cef4d8a6bb54c1c87a5f7442b214ce72/%{name}-%{version}.tar.gz
+# Source0-md5:	5135eeb2c4cde393c242ed97f62785a8
 URL:		https://gitlab.com/gsasl/libgssglue
 Obsoletes:	libgssapi < 0.12
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,7 +52,6 @@ Statyczna biblioteka libgssglue.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %configure
@@ -66,7 +64,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/%{_lib}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-sed -e 's|/lib/|/%{_lib}/|g' doc/gssapi_mech.conf > $RPM_BUILD_ROOT%{_sysconfdir}/gssapi_mech.conf
+cp -p doc/gssapi_mech.conf $RPM_BUILD_ROOT%{_sysconfdir}
 
 %{__mv} $RPM_BUILD_ROOT%{_libdir}/lib*.so.* $RPM_BUILD_ROOT/%{_lib}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.so
