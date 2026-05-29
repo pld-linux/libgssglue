@@ -1,13 +1,13 @@
 Summary:	GSSAPI interface using mechanisms from other GSSAPI implementations
 Summary(pl.UTF-8):	Interfejs GSSAPI używający mechanizmów z innych implementacji GSSAPI
 Name:		libgssglue
-Version:	0.8
+Version:	0.9
 Release:	1
 License:	BSD/MIT
 Group:		Libraries
 #Source0Download: https://gitlab.com/gsasl/libgssglue/-/releases
-Source0:	https://gitlab.com/gsasl/libgssglue/uploads/cef4d8a6bb54c1c87a5f7442b214ce72/%{name}-%{version}.tar.gz
-# Source0-md5:	5135eeb2c4cde393c242ed97f62785a8
+Source0:	https://gitlab.com/gsasl/libgssglue/uploads/7310f7060cdf240a4b8eaaf80a435986/%{name}-%{version}.tar.gz
+# Source0-md5:	0990a1745d469b9c48b487ada4ec8e05
 URL:		https://gitlab.com/gsasl/libgssglue
 Obsoletes:	libgssapi < 0.12
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -82,14 +82,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog README
-%attr(755,root,root) /%{_lib}/libgssglue.so.*.*.*
-%attr(755,root,root) %ghost /%{_lib}/libgssglue.so.1
+%doc AUTHORS COPYING NEWS README
+/%{_lib}/libgssglue.so.*.*.*
+%ghost /%{_lib}/libgssglue.so.1
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gssapi_mech.conf
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgssglue.so
+%{_libdir}/libgssglue.so
 %{_includedir}/gssglue
 %{_pkgconfigdir}/libgssglue.pc
 
